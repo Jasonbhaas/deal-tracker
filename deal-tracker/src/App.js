@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 
+//test comment
+
 var products = [
   {
     name: "Achilles Low Top",
