@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { read } from 'fs';
 
 //test comment
 
@@ -17,6 +18,16 @@ var products = [
     image: '/images/shirt.jpeg'
   }
 ]
+
+class App extends React.Component {
+  render() {
+    return (
+      <div className="container mt-4">
+        <Feed></Feed>
+      </div>
+    )
+  }
+}
 
 
 class Feed extends React.Component {
@@ -39,7 +50,7 @@ class Feed extends React.Component {
 class ProductCard extends React.Component {
   render() {
     return (
-      <div className="row">
+      <div className="row card mt-3">
         <div className="col-md-5 item-pic">
           <img src={this.props.product.image} width='250px' />
         </div>
@@ -53,4 +64,4 @@ class ProductCard extends React.Component {
   }
 }
 
-export default Feed;
+export default App;
