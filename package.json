@@ -1,0 +1,30 @@
+{
+  "name": "deal-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jasonbhaas/deal-tracker.git"
+  },
+  "author": "Jason Haas",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/Jasonbhaas/deal-tracker/issues"
+  },
+  "homepage": "https://github.com/Jasonbhaas/deal-tracker#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.0",
+    "express": "^4.17.0",
+    "mongoose": "^5.5.9"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
