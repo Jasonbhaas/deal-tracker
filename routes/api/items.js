@@ -20,7 +20,8 @@ router.post("/", (req, res) => {
   const newItem = new Item({
     name: req.body.name,
     price: req.body.price,
-    make: req.body.make
+    make: req.body.make,
+    image: req.body.image
   });
   newItem.save().then(item => res.json(item));
 });

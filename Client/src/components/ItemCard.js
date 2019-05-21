@@ -6,8 +6,9 @@ class ItemCard extends Component {
     return (
       <ListGroupItem>
         {this.props.product.name}
-        <br />
+        <hr />
         {this.props.product.make}
+        <img src={`/${this.props.product.image}`} />
       </ListGroupItem>
     );
   }
