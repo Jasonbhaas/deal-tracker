@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
+import { connect } from "react-redux";
+import { getItems, deleteItem } from "../actions/itemActions";
+import PropTypes from "prop-types";
+import ItemCard from "./ItemCard";
 
 var products = [
   {
@@ -15,34 +20,36 @@ var products = [
   }
 ];
 
-class Feed extends React.Component {
-  render() {
-    const Cards = products.map(x => {
-      return (
-        <li>
-          <ProductCard product={x} />
-        </li>
-      );
-    });
-    return <ul>{Cards}</ul>;
+class Feed extends Component {
+  componentDidMount() {
+    console.log("Component mounted");
+    this.props.getItems();
   }
-}
 
-class ProductCard extends React.Component {
   render() {
+    const { items } = this.props.item;
     return (
-      <div className='row card mt-3'>
-        <div className='col-md-5 item-pic'>
-          <img src={this.props.product.image} width='250px' />
-        </div>
-        <div className='col-md-7 item-desc'>
-          <h2>{this.props.product.name}</h2>
-          <h3>{this.props.product.brand}</h3>
-          <ul>
-            <li>${this.props.product.price}</li>
-          </ul>
-        </div>
-      </div>
+      <Container>
+        <ListGroup>
+          {items.map(item => (
+            <ItemCard product={item} />
+          ))}
+        </ListGroup>
+      </Container>
     );
   }
 }
+
+Feed.propTypes = {
+  getItems: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  item: state.item
+});
+
+export default connect(
+  mapStateToProps,
+  { getItems, deleteItem }
+)(Feed);
