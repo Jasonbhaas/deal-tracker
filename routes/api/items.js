@@ -1,42 +1,33 @@
 const express = require("express");
 const router = express.Router();
 
-// Item Model
-const Item = require("../../models/Item");
+// Items controller
+const Items = require("../../controllers/itemsController");
 
 // @route   GET api/items
 // @desc    Get all Items
 // @access  Public
-router.get("/", (req, res) => {
-  Item.find()
-    .sort({ date: -1 })
-    .then(items => res.json(items));
-});
+router.get("/", Items.findAll);
+
+// @route   GET api/items/id
+// @desc    Get a single item
+// @access  Public
+router.get("/:id", Items.findOne);
 
 // @route   POST api/items
 // @desc    Create an item
 // @access  Public
-router.post("/", (req, res) => {
-  const newItem = new Item({
-    name: req.body.name,
-    price: req.body.price,
-    make: req.body.make,
-    image: req.body.image
-  });
-  newItem.save().then(item => res.json(item));
-});
+router.post("/", (req, res) => {});
 
-// @route   PUT api/items/id
-// @desc    Update an item
+// @route   PUT api/items/id/price
+// @desc    Add to the price history
 // @access  Public
-router.put("/:id", (req, res) => {
-  Item.updateOne(
-    { _id: req.params.id },
-    {
-      $push: { priceHistory: { price: req.body.price } }
-    }
-  ).then(res.json({ success: true }));
-});
+router.put("/:id/price", Items.addPrice);
+
+// @route   PUT api/items/id/price
+// @desc    Add to the price history
+// @access  Public
+router.put("/:id", Items.update);
 
 // @route   DELETE api/items/:id
 // @desc    Deletes an item
