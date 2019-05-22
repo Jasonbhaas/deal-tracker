@@ -49,4 +49,8 @@ exports.update = (req, res) => {
 };
 
 // Delete a item with the specified itemId in the request
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+  Item.findById(req.params.id)
+    .then(item => item.remove().then(() => res.json({ success: true })))
+    .catch(err => res.sendStatus(404));
+};
