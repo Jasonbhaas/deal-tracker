@@ -3,16 +3,8 @@ const Item = require("../models/item");
 // Create and Save a new item
 exports.create = (req, res) => {
   Item.create(req.body, err => {
-    console.log(err);
+    res.sendStatus(500);
   });
-
-  // const newItem = new Item({
-  //     name: req.body.name,
-  //     price: req.body.price,
-  //     make: req.body.make,
-  //     image: req.body.image
-  // });
-  // newItem.save().then(item => res.json(item));
 };
 
 // Retrieve and return all items from the database.
