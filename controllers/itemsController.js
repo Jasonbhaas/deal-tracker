@@ -5,6 +5,7 @@ exports.create = (req, res) => {
   Item.create(req.body, err => {
     res.sendStatus(500);
   });
+
 };
 
 // Retrieve and return all items from the database.
