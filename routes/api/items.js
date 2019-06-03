@@ -17,7 +17,7 @@ router.get("/:id", Items.findOne);
 // @route   POST api/items
 // @desc    Create an item
 // @access  Public
-router.post("/", (req, res) => {});
+router.post("/", Items.create);
 
 // @route   PUT api/items/id/price
 // @desc    Add to the price history

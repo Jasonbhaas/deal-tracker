@@ -1,4 +1,10 @@
 from pymongo import MongoClient
+
+url = "mongodb+srv://jason:jason123@cluster0-5lvli.mongodb.net/dev?retryWrites=true&w=majority"
+
+client = MongoClient(url)
+itemsCollection = client.dev.items
+
 items = [{
     "name": "Achilles Low",
     "make": "Common Projects",
@@ -19,10 +25,15 @@ items = [{
     "image": "images/jeans.jpeg",
     "url": "https://shop.nordstrom.com/s/frame-lhomme-slim-fit-jeans-bradbury/4770233",
     "keyword": "_2cY3bT",
+},
+    {
+    "name": "Peruvian Pima Cotton Robe",
+    "make": "Daniel Buchler",
+    "image": "images/robe.jpeg",
+    "url": "https://shop.nordstrom.com/s/daniel-buchler-peruvian-pima-cotton-robe/3675851",
+    "keyword": "_2cY3bT"
 }]
 
-client = MongoClient('localhost', 27017)
-
-db = client.dealTrackerDev
-
-db['items'].insert_many(items)
+if __name__ == "__main__":
+    itemsCollection.delete_many({})
+    itemsCollection.insert_many(items)

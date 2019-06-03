@@ -2,10 +2,11 @@ const Item = require("../models/item");
 
 // Create and Save a new item
 exports.create = (req, res) => {
-  Item.create(req.body, err => {
-    res.sendStatus(500);
-  });
-
+  Item.create(req.body)
+    .then(response => res.json(response))
+    .catch(err => {
+      res.sendStatus(500);
+    });
 };
 
 // Retrieve and return all items from the database.
