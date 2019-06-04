@@ -19,7 +19,7 @@ for item in items.find():
         print(price)
         items.update_one({'_id': item['_id']},
                          {'$push': {'priceHistory': {'price': float(price),
-                                                     'date': datetime.datetime.now()}}})
+                                                     'date': datetime.datetime.today()}}})
     except:
         print("error!")
 
