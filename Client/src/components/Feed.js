@@ -37,12 +37,33 @@ class Feed extends Component {
                 <h1 className='display-3'>{item.name}</h1>
                 <h3>{item.make}</h3>
                 <ListGroup flush>
-                  {item.priceHistory.map(priceLog => [
-                    <ListGroupItem>
-                      {moment(priceLog.date).format("MMM Do YYYY")}
-                      <span className='float-right'>${priceLog.price} </span>
-                    </ListGroupItem>
-                  ])}
+                  <ListGroupItem>
+                    Highest $
+                    {Math.max(
+                      ...item.priceHistory.map(priceLog => priceLog.price)
+                    )}
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    Lowest $
+                    {Math.min(
+                      ...item.priceHistory.map(priceLog => priceLog.price)
+                    )}
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    Most Recent $
+                    {
+                      item.priceHistory.sort(function(a, b) {
+                        return b.date - a.date;
+                      })[0].price
+                    }
+                    <span className='float-right'>
+                      {moment(
+                        item.priceHistory.sort(function(a, b) {
+                          return b.date - a.date;
+                        }).date
+                      ).format("MMM Do YYYY")}
+                    </span>
+                  </ListGroupItem>
                 </ListGroup>
               </Col>
             </Row>
