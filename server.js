@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const config = require("config");
 
-const db = require("./config/keys").mongoURI;
+const db = config.get("mongoURI");
 
 const app = express();
 

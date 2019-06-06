@@ -1,12 +1,50 @@
 const User = require("../models/user.js");
+const bcrypt = require("bcryptjs");
+const config = require("config");
+const jwt = require("jsonwebtoken");
 
 // Create and Save a new users
 exports.create = (req, res) => {
-  User.create(req.body)
-    .then(response => res.json(response))
-    .catch(err => {
-      res.sendStatus(500);
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) {
+    return res.status(400).json({
+      msg: "Please include all fields"
     });
+  }
+  User.findOne({ email }).then(user => {
+    if (user) return res.status(400).json({ msg: "User already exists" });
+  });
+
+  const newUser = new User({
+    name: name,
+    email: email,
+    password: password
+  });
+
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(password, salt, (err, hash) => {
+      if (err) throw err;
+      newUser.password = hash;
+      newUser.save().then(user => {
+        jwt.sign(
+          { id: user.id },
+          config.get("jwtSecret"),
+          { expiresIn: 3600 },
+          (err, token) => {
+            if (err) throw err;
+            res.json({
+              token: token,
+              user: {
+                name: user.name,
+                id: user._id,
+                email: user.email
+              }
+            });
+          }
+        );
+      });
+    });
+  });
 };
 
 // Find a single user with a userId

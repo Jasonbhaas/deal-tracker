@@ -21,8 +21,11 @@
   },
   "homepage": "https://github.com/Jasonbhaas/deal-tracker#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "concurrently": "^4.1.0",
+    "config": "^3.1.0",
     "express": "^4.17.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.9"
   },
   "devDependencies": {
