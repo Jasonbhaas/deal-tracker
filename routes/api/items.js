@@ -25,7 +25,7 @@ router.post("/", Items.create);
 router.put("/:id/price", Items.addPrice);
 
 // @route   PUT api/items/id/price
-// @desc    Add to the price history
+// @desc    Update a single item
 // @access  Public
 router.put("/:id", Items.update);
 
