@@ -5,7 +5,7 @@ const auth = require("../../Middleware/auth");
 // Items controller
 const Users = require("../../controllers/usersController");
 
-// @route   GET api/users/id
+// @route   GET api/users
 // @desc    Returns current user info using JWT token
 // @access  Public
 router.get("/", auth, Users.getUser);
