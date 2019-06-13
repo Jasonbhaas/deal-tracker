@@ -1,3 +1,5 @@
+import { stringify } from "querystring";
+
 import axios from "axios";
 import {
   USER_LOADING,
@@ -30,13 +32,39 @@ export const loadUser = () => (dispatch, getState) => {
     });
 };
 
+export const register = ({ name, email, password }) => dispatch => {
+  // headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  const body = JSON.stringify({ name, email, password });
+
+  axios
+    .post("/api/users", body, config)
+    .then(res => {
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({ type: REGISTER_FAIL });
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
+      );
+    });
+};
+
 const tokenConfig = getState => {
   // get token from local storage
   const token = getState().auth.token;
 
   const config = {
     headers: {
-      "Content-type": "application/json"
+      "Content-Type": "application/json"
     }
   };
 

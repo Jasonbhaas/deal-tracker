@@ -10,6 +10,8 @@ import {
   Container
 } from "reactstrap";
 
+import RegisterModal from "./RegisterModal";
+
 class AppNavBar extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +36,9 @@ class AppNavBar extends Component {
               <Nav className='ml-auto' navbar>
                 <NavItem>
                   <NavLink href='https://github.com/jasonbhaas'>Github</NavLink>
+                </NavItem>
+                <NavItem>
+                  <RegisterModal />
                 </NavItem>
               </Nav>
             </Collapse>
