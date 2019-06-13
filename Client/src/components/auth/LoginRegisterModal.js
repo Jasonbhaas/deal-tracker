@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Button,
   Modal,
@@ -16,13 +16,16 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
-class LoginModal extends Component {
+class LoginRegisterModal extends Component {
   state = {
     modal: false,
     email: "",
     password: "",
-    msg: null
+    msg: null,
+    login: true
   };
 
   static propTypes = {
@@ -43,15 +46,22 @@ class LoginModal extends Component {
       }
     }
     if (this.state.modal && isAuthenticated) {
-      this.toggle();
+      this.toggleModal();
     }
   }
 
-  toggle = () => {
+  toggleModal = () => {
     // Clear errors
     this.props.clearErrors();
     this.setState({
       modal: !this.state.modal
+    });
+  };
+
+  toggleLogin = () => {
+    this.props.clearErrors();
+    this.setState({
+      login: !this.state.login
     });
   };
 
@@ -73,44 +83,29 @@ class LoginModal extends Component {
   };
 
   render() {
+    const login = this.state.login;
     return (
       <div>
-        <NavLink onClick={this.toggle} href='#'>
-          Login
+        <NavLink onClick={this.toggleModal} href='#'>
+          Login/Register
         </NavLink>
 
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Login</ModalHeader>
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+          <ModalHeader toggle={this.toggleModal}>
+            {login ? "Login" : "Register"}
+          </ModalHeader>
           <ModalBody>
             {this.state.msg ? (
               <Alert color='danger'>{this.state.msg}</Alert>
             ) : null}
-            <Form onSubmit={this.onSubmit}>
-              <FormGroup>
-                <Label for='email'>Email</Label>
-                <Input
-                  type='email'
-                  name='email'
-                  id='email'
-                  placeholder='Email'
-                  className='mb-3'
-                  onChange={this.onChange}
-                />
-
-                <Label for='password'>Password</Label>
-                <Input
-                  type='password'
-                  name='password'
-                  id='password'
-                  placeholder='Password'
-                  className='mb-3'
-                  onChange={this.onChange}
-                />
-                <Button color='dark' style={{ marginTop: "2rem" }} block>
-                  Login
-                </Button>
-              </FormGroup>
-            </Form>
+            {login ? <LoginForm /> : <RegisterForm />}
+            <p className='text-center mt-1 mb-0 ' onClick={this.toggleLogin}>
+              <a href='#' className='text-muted'>
+                {login
+                  ? "New user? Register Here"
+                  : "Already registered? Login Here"}
+              </a>
+            </p>
           </ModalBody>
         </Modal>
       </div>
@@ -126,4 +121,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { login, clearErrors }
-)(LoginModal);
+)(LoginRegisterModal);

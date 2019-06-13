@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Collapse,
   Navbar,
@@ -14,7 +14,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import RegisterModal from "./auth/RegisterModal";
 import Logout from "./auth/Logout";
-import LoginModal from "./auth/LoginModal";
+import LoginRegisterModal from "./auth/LoginRegisterModal";
 
 class AppNavBar extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class AppNavBar extends Component {
   }
 
   static propTypes = {
-    isAuthenticated: PropTypes.bool
+    auth: PropTypes.object.isRequired
   };
 
   componentDidMount() {}
@@ -37,6 +37,23 @@ class AppNavBar extends Component {
   };
 
   render() {
+    const { isAuthenticated, user } = this.props.auth;
+
+    const authLinks = (
+      <Fragment>
+        <NavItem>
+          <span className='mr-3 navbar-text'>
+            {user ? `Welcome ${user.name.split(" ")[0]}` : ""}
+          </span>
+        </NavItem>
+        <NavItem>
+          <Logout />
+        </NavItem>
+      </Fragment>
+    );
+
+    const guestLinks = <LoginRegisterModal />;
+
     return (
       <div>
         <Navbar color='dark' dark expand='sm' className='mb-5'>
@@ -45,15 +62,7 @@ class AppNavBar extends Component {
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className='ml-auto' navbar>
-                <NavItem>
-                  <NavLink href='https://github.com/jasonbhaas'>Github</NavLink>
-                </NavItem>
-                <NavItem>
-                  {this.props.isAuthenticated ? <Logout /> : <RegisterModal />}
-                </NavItem>
-                <NavItem>
-                  <LoginModal />
-                </NavItem>
+                {isAuthenticated ? authLinks : guestLinks}
               </Nav>
             </Collapse>
           </Container>
@@ -64,7 +73,7 @@ class AppNavBar extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  auth: state.auth
 });
 
 export default connect(
