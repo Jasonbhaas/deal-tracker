@@ -15,11 +15,6 @@ router.get("/", auth, Users.getUser);
 // @access  Public
 router.post("/", Users.create);
 
-// @route   PUT api/users/id/price
-// @desc    Update user fields
-// @access  Private
-router.put("/:id", auth, Users.update);
-
 // @route   DELETE api/users/:id
 // @desc    Deletes an item
 // @access  Private

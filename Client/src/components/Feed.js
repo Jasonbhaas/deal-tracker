@@ -53,14 +53,14 @@ class Feed extends Component {
                     Most Recent $
                     {
                       item.priceHistory.sort(function(a, b) {
-                        return b.date - a.date;
+                        return a.date - b.date;
                       })[0].price
                     }
                     <span className='float-right'>
                       {moment(
                         item.priceHistory.sort(function(a, b) {
-                          return b.date - a.date;
-                        }).date
+                          return a.date - b.date;
+                        })[0].date
                       ).format("MMM Do YYYY")}
                     </span>
                   </ListGroupItem>

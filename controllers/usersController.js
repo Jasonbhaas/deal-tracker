@@ -11,12 +11,13 @@ exports.create = (req, res) => {
       msg: "Please include all fields"
     });
   }
-  User.findOne({ email }).then(user => {
+  const emailLower = email.toLowerCase();
+  User.findOne({ emailLower }).then(user => {
     if (user) return res.status(400).json({ msg: "User already exists" });
   });
   const newUser = new User({
     name: name,
-    email: email,
+    email: emailLower,
     password: password
   });
   bcrypt.genSalt(10, (err, salt) => {
@@ -37,7 +38,8 @@ exports.login = (req, res) => {
       msg: "Please include all fields"
     });
   }
-  User.findOne({ email }).then(user => {
+  const emailLower = email.toLowerCase();
+  User.findOne({ email: emailLower }).then(user => {
     if (!user) return res.status(400).json({ msg: "User does not exist" });
     bcrypt.compare(password, user.password).then(correctPassword => {
       if (correctPassword) {
@@ -56,19 +58,6 @@ exports.getUser = (req, res) => {
       res.status(200).json(user);
     })
     .catch(err => res.sendStatus(404));
-};
-
-// Update a user identified by the userId in the request
-exports.update = (req, res) => {
-  const { name, email, password } = req.body;
-  if (password)
-    return res.status(400).json({ msg: "Password cannot be updated" });
-  if (!name && !email)
-    return res.status(400).json({ msg: "No changes submitted" });
-
-  User.updateOne({ _id: req.params.id }, req.body)
-    .then(response => res.json(response))
-    .catch(err => res.sendStatus(500));
 };
 
 // Delete a user with the specified userId in the request
