@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import moment from "moment";
 import {
   Container,
@@ -25,51 +25,12 @@ class Feed extends Component {
     const { items } = this.props.item;
     return (
       <Container>
-        {items.map(item => [
-          <Container>
-            <Row>
-              <Col sm='6'>
-                <div className='thumbnail'>
-                  <img src={item.image} className='img-fluid' />
-                </div>
-              </Col>
-              <Col sm={{ size: 5, offset: 1 }}>
-                <h1 className='display-3'>{item.name}</h1>
-                <h3>{item.make}</h3>
-                <ListGroup flush>
-                  <ListGroupItem>
-                    Highest $
-                    {Math.max(
-                      ...item.priceHistory.map(priceLog => priceLog.price)
-                    )}
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    Lowest $
-                    {Math.min(
-                      ...item.priceHistory.map(priceLog => priceLog.price)
-                    )}
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    Most Recent $
-                    {
-                      item.priceHistory.sort(function(a, b) {
-                        return a.date - b.date;
-                      })[0].price
-                    }
-                    <span className='float-right'>
-                      {moment(
-                        item.priceHistory.sort(function(a, b) {
-                          return a.date - b.date;
-                        })[0].date
-                      ).format("MMM Do YYYY")}
-                    </span>
-                  </ListGroupItem>
-                </ListGroup>
-              </Col>
-            </Row>
-          </Container>,
-          <hr />
-        ])}
+        {items.map(item => (
+          <Fragment>
+            <ItemCard item={item} />
+            <hr />
+          </Fragment>
+        ))}
       </Container>
     );
   }

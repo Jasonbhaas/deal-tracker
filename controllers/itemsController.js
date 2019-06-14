@@ -12,7 +12,7 @@ exports.create = (req, res) => {
 // Retrieve and return all items from the database.
 exports.findAll = (req, res) => {
   Item.find()
-    .sort({ date: -1 })
+    .sort({ date: 1 })
     .then(items => res.json(items));
 };
 
