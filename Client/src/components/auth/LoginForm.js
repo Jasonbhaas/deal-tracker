@@ -1,16 +1,5 @@
 import React, { Component, Fragment } from "react";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  NavLink,
-  Alert
-} from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";

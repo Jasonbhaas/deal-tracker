@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import {
   Container,
   Button,
-  Thumbnail,
   Col,
   Row,
-  Img,
   ListGroup,
   ListGroupItem
 } from "reactstrap";
@@ -27,7 +25,11 @@ class ItemCard extends Component {
         <Row>
           <Col sm='6'>
             <div className='thumbnail'>
-              <img src={this.props.item.image} className='img-fluid' />
+              <img
+                src={this.props.item.image}
+                className='img-fluid'
+                alt={this.props.item.name}
+              />
             </div>
           </Col>
           <Col sm={{ size: 5, offset: 1 }}>

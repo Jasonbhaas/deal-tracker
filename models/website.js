@@ -3,27 +3,20 @@ const Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Create schema
-const ItemSchema = new Schema({
+const WebsiteSchema = new Schema({
   name: {
     type: String,
     required: true
   },
-  date: {
-    type: Date,
-    default: Date.now
-  },
-  make: String,
-  priceHistory: [
-    {
-      date: { type: Date, default: Date.now },
-      price: Number
-    }
-  ],
-  createdBy: {
-    type: ObjectId,
+  url: {
+    type: string,
     required: true
   },
-  image: String
+  keywords: [
+    {
+      type: string
+    }
+  ]
 });
 
 module.exports = Item = mongoose.model("item", ItemSchema);

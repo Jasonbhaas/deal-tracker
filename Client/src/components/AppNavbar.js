@@ -6,13 +6,11 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Container
 } from "reactstrap";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import RegisterModal from "./auth/RegisterModal";
 import Logout from "./auth/Logout";
 import LoginRegisterModal from "./auth/LoginRegisterModal";
 

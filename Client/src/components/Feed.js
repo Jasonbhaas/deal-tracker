@@ -1,15 +1,5 @@
 import React, { Component, Fragment } from "react";
-import moment from "moment";
-import {
-  Container,
-  Button,
-  Thumbnail,
-  Col,
-  Row,
-  Img,
-  ListGroup,
-  ListGroupItem
-} from "reactstrap";
+import { Container } from "reactstrap";
 import { connect } from "react-redux";
 import { getItems, deleteItem } from "../actions/itemActions";
 import PropTypes from "prop-types";

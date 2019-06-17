@@ -1,16 +1,5 @@
-import React, { Component } from "react";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  NavLink,
-  Alert
-} from "reactstrap";
+import React, { Component, Fragment } from "react";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -76,42 +65,44 @@ class RegisterForm extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.onSubmit}>
-        <FormGroup>
-          <Label for='name'>Name</Label>
-          <Input
-            type='text'
-            name='name'
-            id='name'
-            placeholder='Name'
-            className='mb-3'
-            onChange={this.onChange}
-          />
+      <Fragment>
+        <Form onSubmit={this.onSubmit}>
+          <FormGroup>
+            <Label for='name'>Name</Label>
+            <Input
+              type='text'
+              name='name'
+              id='name'
+              placeholder='Name'
+              className='mb-3'
+              onChange={this.onChange}
+            />
 
-          <Label for='email'>Email</Label>
-          <Input
-            type='email'
-            name='email'
-            id='email'
-            placeholder='Email'
-            className='mb-3'
-            onChange={this.onChange}
-          />
+            <Label for='email'>Email</Label>
+            <Input
+              type='email'
+              name='email'
+              id='email'
+              placeholder='Email'
+              className='mb-3'
+              onChange={this.onChange}
+            />
 
-          <Label for='password'>Password</Label>
-          <Input
-            type='password'
-            name='password'
-            id='password'
-            placeholder='Password'
-            className='mb-3'
-            onChange={this.onChange}
-          />
-          <Button color='dark' style={{ marginTop: "2rem" }} block>
-            Register
-          </Button>
-        </FormGroup>
-      </Form>
+            <Label for='password'>Password</Label>
+            <Input
+              type='password'
+              name='password'
+              id='password'
+              placeholder='Password'
+              className='mb-3'
+              onChange={this.onChange}
+            />
+            <Button color='dark' style={{ marginTop: "2rem" }} block>
+              Register
+            </Button>
+          </FormGroup>
+        </Form>
+      </Fragment>
     );
   }
 }
