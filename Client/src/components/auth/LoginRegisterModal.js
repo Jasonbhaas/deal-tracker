@@ -1,16 +1,5 @@
-import React, { Component, Fragment } from "react";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  NavLink,
-  Alert
-} from "reactstrap";
+import React, { Component } from "react";
+import { Modal, ModalHeader, ModalBody, NavLink, Alert } from "reactstrap";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -100,11 +89,11 @@ class LoginRegisterModal extends Component {
             ) : null}
             {login ? <LoginForm /> : <RegisterForm />}
             <p className='text-center mt-1 mb-0 ' onClick={this.toggleLogin}>
-              <a href='#' className='text-muted'>
+              <button className='btn btn-outline-primary btn-sm'>
                 {login
                   ? "New user? Register Here"
                   : "Already registered? Login Here"}
-              </a>
+              </button>
             </p>
           </ModalBody>
         </Modal>

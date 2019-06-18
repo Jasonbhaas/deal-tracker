@@ -1,5 +1,3 @@
-import { stringify } from "querystring";
-
 import axios from "axios";
 import {
   USER_LOADING,
