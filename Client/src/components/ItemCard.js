@@ -37,19 +37,19 @@ class ItemCard extends Component {
             <h3>{this.props.item.make}</h3>
             <ListGroup flush>
               <ListGroupItem>
-                Highest ${highest.price}
+                Highest ${highest.price.toFixed(2)}
                 <span className='float-right'>
                   {moment(highest.date).format("MMM Do YYYY")}
                 </span>
               </ListGroupItem>
               <ListGroupItem>
-                Lowest ${lowest.price}
+                Lowest ${lowest.price.toFixed(2)}
                 <span className='float-right'>
                   {moment(lowest.date).format("MMM Do YYYY")}
                 </span>
               </ListGroupItem>
               <ListGroupItem>
-                Most Recent $ {lastPrice.price}
+                Most Recent $ {lastPrice.price.toFixed(2)}
                 <span className='float-right'>
                   {moment(lastPrice.date).format("MMM Do YYYY")}
                 </span>
