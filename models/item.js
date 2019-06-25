@@ -23,7 +23,9 @@ const ItemSchema = new Schema({
     type: ObjectId,
     required: true
   },
-  image: String
+  image: String,
+  vendors: [{ vendor: String }],
+  url: String
 });
 
 module.exports = Item = mongoose.model("item", ItemSchema);

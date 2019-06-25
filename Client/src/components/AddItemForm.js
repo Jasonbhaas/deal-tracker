@@ -3,21 +3,23 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { register } from "../../actions/authActions";
+import { addItem } from "../../actions/itemActions";
 import { clearErrors } from "../../actions/errorActions";
 
 class RegisterForm extends Component {
   state = {
+    modal: false,
     name: "",
-    email: "",
-    password: "",
+    make: "",
+    vendors: [],
+    url: "",
     msg: null
   };
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
-    register: PropTypes.func.isRequired,
+    addItem: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
   };
 
@@ -25,13 +27,22 @@ class RegisterForm extends Component {
     const { error, isAuthenticated } = this.props;
     if (error !== prevProps.error) {
       // Check for register error
-      if (error.id === "REGISTER_FAIL") {
+      if (error.id === "ITEM_CREATION_FAIL") {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
       }
     }
   }
+
+  toggle = () => {
+    // Clear errors
+    this.props.clearErrors();
+    this.setState({
+      modal: !this.state.modal
+    });
+  };
+
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -39,15 +50,16 @@ class RegisterForm extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { name, email, password } = this.state;
+    const { name, make, vendors, url } = this.state;
 
-    const newUser = {
+    const newItem = {
       name,
-      email,
-      password
+      make,
+      vendors,
+      url
     };
 
-    this.props.register(newUser);
+    this.props.addItem(newItem);
   };
 
   render() {
@@ -65,22 +77,32 @@ class RegisterForm extends Component {
               onChange={this.onChange}
             />
 
-            <Label for='email'>Email</Label>
+            <Label for='url'>Url</Label>
             <Input
-              type='email'
-              name='email'
-              id='email'
-              placeholder='Email'
+              type='url'
+              name='url'
+              id='url'
+              placeholder='Item Url'
               className='mb-3'
               onChange={this.onChange}
             />
 
-            <Label for='password'>Password</Label>
+            <Label for='make'>Make</Label>
             <Input
-              type='password'
-              name='password'
-              id='password'
-              placeholder='Password'
+              type='make'
+              name='make'
+              id='make'
+              placeholder='Brand'
+              className='mb-3'
+              onChange={this.onChange}
+            />
+
+            <Label for='vendor'>Vendor</Label>
+            <Input
+              type='vendor'
+              name='vendor'
+              id='vendor'
+              placeholder='Website'
               className='mb-3'
               onChange={this.onChange}
             />
@@ -101,5 +123,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { register, clearErrors }
-)(RegisterForm);
+  { addItem, clearErrors }
+)(AddItemForm);

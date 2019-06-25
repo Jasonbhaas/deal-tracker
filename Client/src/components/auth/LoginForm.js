@@ -8,7 +8,6 @@ import { clearErrors } from "../../actions/errorActions";
 
 class LoginForm extends Component {
   state = {
-    modal: false,
     email: "",
     password: "",
     msg: null
@@ -31,18 +30,7 @@ class LoginForm extends Component {
         this.setState({ msg: null });
       }
     }
-    if (this.state.modal && isAuthenticated) {
-      this.toggle();
-    }
   }
-
-  toggle = () => {
-    // Clear errors
-    this.props.clearErrors();
-    this.setState({
-      modal: !this.state.modal
-    });
-  };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
