@@ -2,9 +2,13 @@ const Item = require("../models/item");
 
 // Create and Save a new item
 exports.create = (req, res) => {
+  console.log(req.body);
+  req.body["createdBy"] = req.user.id;
+  console.log(req.user);
   Item.create(req.body)
     .then(response => res.json(response))
     .catch(err => {
+      // console.log(err);
       res.sendStatus(500);
     });
 };
@@ -25,6 +29,7 @@ exports.findOne = (req, res) => {
 
 // Add a datapoint to the price history
 exports.addPrice = (req, res) => {
+  console.log(req.body);
   Item.updateOne(
     { _id: req.params.id },
     {

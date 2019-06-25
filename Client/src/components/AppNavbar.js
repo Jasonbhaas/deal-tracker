@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Logout from "./auth/Logout";
 import LoginRegisterModal from "./auth/LoginRegisterModal";
+import AddItemForm from "./AddItemForm";
 
 class AppNavBar extends Component {
   constructor(props) {
@@ -46,6 +47,9 @@ class AppNavBar extends Component {
         </NavItem>
         <NavItem>
           <Logout />
+        </NavItem>
+        <NavItem>
+          <AddItemForm />
         </NavItem>
       </Fragment>
     );

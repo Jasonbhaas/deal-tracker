@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../../Middleware/auth");
 
-// Items controller
+// Users controller
 const Users = require("../../controllers/usersController");
 
 // @route   GET api/users
