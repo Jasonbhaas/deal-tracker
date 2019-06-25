@@ -33,8 +33,8 @@ class ItemCard extends Component {
             </div>
           </Col>
           <Col sm={{ size: 5, offset: 1 }}>
-            <h1 className='display-3'>{this.props.item.name}</h1>
-            <h3>{this.props.item.make}</h3>
+            <h2 className='display-3'>{this.props.item.name}</h2>
+            <h4>{this.props.item.make}</h4>
             <ListGroup flush>
               <ListGroupItem>
                 Highest ${highest.price.toFixed(2)}
