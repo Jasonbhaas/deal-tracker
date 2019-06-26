@@ -5,10 +5,9 @@ from scraper import get_price
 import pprint
 import datetime
 
-urlDev = "mongodb+srv://jason:jason123@cluster0-5lvli.mongodb.net/dev?retryWrites=true&w=majority"
-urlTest = "mongodb+srv://jason:jason123@cluster0-5lvli.mongodb.net/test?retryWrites=true&w=majority"
+url = "mongodb+srv://jason:jason123@cluster0-5lvli.mongodb.net/dev?retryWrites=true&w=majority"
 
-client = MongoClient(urlTest)
+client = MongoClient(url)
 items = client.dev.items
 
 # for item in items.find():
