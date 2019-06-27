@@ -19,7 +19,7 @@ items = [{
     "make": "Good Man Brand",
     "image": "images/shirt.jpeg",
     "url": "https://shop.nordstrom.com/s/good-man-brand-kensington-slim-fit-floral-print-cotton-sport-shirt/5139306",
-    "keyword": "_2cY3bT",
+    "keyword": "Z1WEo3w",
     "date": datetime.datetime.now()
 },
     {
@@ -27,7 +27,7 @@ items = [{
     "make": "Frame",
     "image": "images/jeans.jpeg",
     "url": "https://shop.nordstrom.com/s/frame-lhomme-slim-fit-jeans-bradbury/4770233",
-    "keyword": "_2cY3bT",
+    "keyword": "Z1WEo3w",
     "date": datetime.datetime.now()
 },
     {
@@ -35,7 +35,15 @@ items = [{
     "make": "Daniel Buchler",
     "image": "images/robe.jpeg",
     "url": "https://shop.nordstrom.com/s/daniel-buchler-peruvian-pima-cotton-robe/3675851",
-    "keyword": "_2cY3bT",
+    "keyword": "Z1WEo3w",
+    "date": datetime.datetime.now()
+},
+    {
+    "name": "Terrex Free Hiker",
+    "make": "Adidas",
+    "image": "images/hiker.jpeg",
+    "url": "https://shop.nordstrom.com/s/adidas-outdoor-terrex-free-hiker-cr-hiking-shoe-men/5158017",
+    "keyword": "Z1WEo3w",
     "date": datetime.datetime.now()
 }]
 

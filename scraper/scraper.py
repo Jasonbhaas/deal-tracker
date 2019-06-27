@@ -3,8 +3,6 @@ import pprint
 
 from bs4 import BeautifulSoup
 
-# throw in a try catch maybe
-
 
 def get_price(url, keyword):
     page = requests.get(url)
