@@ -2,6 +2,9 @@
   "name": "deal-tracker",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "10.15.3"
+  },
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
