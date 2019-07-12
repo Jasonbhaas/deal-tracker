@@ -14,11 +14,14 @@ class ItemCard extends Component {
     const pricesAscending = [...this.props.item.priceHistory].sort(
       (a, b) => a.price - b.price
     );
-    const highest = pricesAscending[pricesAscending.length - 1];
-    const lowest = pricesAscending[0];
+    const highest = pricesAscending[pricesAscending.length - 1] || {
+      price: 0,
+      date: Date.now()
+    };
+    const lowest = pricesAscending[0] || { price: 0, date: Date.now() };
     const lastPrice = this.props.item.priceHistory[
       this.props.item.priceHistory.length - 1
-    ];
+    ] || { price: 0, date: Date.now() };
 
     return (
       <Container>
