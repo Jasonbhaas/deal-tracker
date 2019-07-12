@@ -8,7 +8,6 @@ exports.create = (req, res) => {
   Item.create(req.body)
     .then(response => res.json(response))
     .catch(err => {
-      // console.log(err);
       res.sendStatus(500);
     });
 };

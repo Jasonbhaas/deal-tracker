@@ -17,7 +17,7 @@ import PropTypes from "prop-types";
 import { addItem } from "../actions/itemActions";
 import { clearErrors } from "../actions/errorActions";
 
-class AddItemForm extends Component {
+class AddItemModal extends Component {
   state = {
     modal: false,
     name: "",
@@ -28,7 +28,7 @@ class AddItemForm extends Component {
   };
 
   static propTypes = {
-    isAuthenticated: PropTypes.bool,
+    auth: PropTypes.object.isRequired,
     error: PropTypes.object.isRequired,
     addItem: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
@@ -70,7 +70,9 @@ class AddItemForm extends Component {
       url
     };
 
-    this.props.addItem(newItem);
+    const token = this.props.auth.token;
+
+    this.props.addItem(newItem, token);
   };
 
   render() {
@@ -109,7 +111,7 @@ class AddItemForm extends Component {
 
                 <Label for='make'>Make</Label>
                 <Input
-                  type='make'
+                  type='text'
                   name='make'
                   id='make'
                   placeholder='Brand'
@@ -119,7 +121,7 @@ class AddItemForm extends Component {
 
                 <Label for='vendor'>Vendor</Label>
                 <Input
-                  type='vendor'
+                  type='text'
                   name='vendor'
                   id='vendor'
                   placeholder='Website'
@@ -139,11 +141,11 @@ class AddItemForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
   error: state.error
 });
 
 export default connect(
   mapStateToProps,
   { addItem, clearErrors }
-)(AddItemForm);
+)(AddItemModal);
