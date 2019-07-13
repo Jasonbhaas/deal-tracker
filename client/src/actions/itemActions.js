@@ -1,5 +1,15 @@
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from "./types";
+import {
+  GET_ITEMS,
+  ADD_ITEM,
+  DELETE_ITEM,
+  ITEMS_LOADING,
+  ITEM_ADDED,
+  ITEM_PROCESSING,
+  ITEM_ERROR
+} from "./types";
 import axios from "axios";
+
+import { returnErrors } from "./errorActions";
 
 export const getItems = () => dispatch => {
   dispatch(setItemsLoading());
@@ -21,6 +31,9 @@ export const deleteItem = id => dispatch => {
 };
 
 export const addItem = (item, token) => dispatch => {
+  // set item_processing to disable add_item button
+  dispatch(setItemProcessing);
+
   const config = {
     url: "/api/items",
     method: "post",
@@ -28,17 +41,28 @@ export const addItem = (item, token) => dispatch => {
     data: item
   };
   axios(config)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: ADD_ITEM,
         payload: res.data
-      })
-    )
-    .catch(err => console.log(err));
+      });
+    })
+    .catch(err => {
+      dispatch({ type: ITEM_ERROR });
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "ITEM_ERROR")
+      );
+    });
 };
 
 export const setItemsLoading = () => {
   return {
     type: ITEMS_LOADING
+  };
+};
+
+export const setItemProcessing = () => {
+  return {
+    type: ITEM_PROCESSING
   };
 };

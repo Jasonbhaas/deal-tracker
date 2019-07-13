@@ -16,7 +16,7 @@ class Feed extends Component {
     return (
       <Container>
         {items.map(item => (
-          <Fragment>
+          <Fragment key={item._id}>
             <ItemCard item={item} />
             <hr />
           </Fragment>
