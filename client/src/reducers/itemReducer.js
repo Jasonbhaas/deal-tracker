@@ -5,7 +5,7 @@ import {
   ITEMS_LOADING,
   ITEM_ADDED,
   ITEM_PROCESSING,
-  ITEM_ERROR
+  ADD_ITEM_ERROR
 } from "../actions/types";
 
 const initialState = {
@@ -43,7 +43,7 @@ export default function(state = initialState, action) {
         ...state,
         itemProcessing: true
       };
-    case ITEM_ERROR:
+    case ADD_ITEM_ERROR:
       return {
         ...state,
         itemProcessing: false,

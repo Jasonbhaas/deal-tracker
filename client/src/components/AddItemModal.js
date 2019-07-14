@@ -38,7 +38,7 @@ class AddItemModal extends Component {
     const { error } = this.props;
     if (error !== prevProps.error) {
       // Check for register error
-      if (error.id === "ITEM_CREATION_FAIL") {
+      if (error.id === "ADD_ITEM_ERROR") {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });

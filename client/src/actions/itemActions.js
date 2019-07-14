@@ -5,7 +5,7 @@ import {
   ITEMS_LOADING,
   ITEM_ADDED,
   ITEM_PROCESSING,
-  ITEM_ERROR
+  ADD_ITEM_ERROR
 } from "./types";
 import axios from "axios";
 
@@ -32,7 +32,7 @@ export const deleteItem = id => dispatch => {
 
 export const addItem = (item, token) => dispatch => {
   // set item_processing to disable add_item button
-  dispatch(setItemProcessing);
+  dispatch(setItemProcessing());
 
   const config = {
     url: "/api/items",
@@ -48,9 +48,9 @@ export const addItem = (item, token) => dispatch => {
       });
     })
     .catch(err => {
-      dispatch({ type: ITEM_ERROR });
+      dispatch({ type: ADD_ITEM_ERROR });
       dispatch(
-        returnErrors(err.response.data, err.response.status, "ITEM_ERROR")
+        returnErrors(err.response.data, err.response.status, "ADD_ITEM_ERROR")
       );
     });
 };
