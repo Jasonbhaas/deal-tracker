@@ -2,14 +2,20 @@ const Item = require("../models/item");
 
 // Create and Save a new item
 exports.create = (req, res) => {
-  console.log(req.body);
-  req.body["createdBy"] = req.user.id;
-  console.log(req.user);
-  Item.create(req.body)
+  const { name, url, make, vendors } = req.body;
+  const createdBy = req.user.id;
+
+  if (!name || !url || !make || !vendors) {
+    return res.status(400).json({
+      msg: "Please include all necessary fields"
+    });
+  }
+  const newItem = { name, url, make, vendors, createdBy };
+  console.log(newItem);
+  Item.create(newItem)
     .then(response => res.json(response))
     .catch(err => {
-      // console.log(err);
-      res.sendStatus(500);
+      res.sendStatus(500).json({ msg: "An error occurred on the server" });
     });
 };
 

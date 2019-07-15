@@ -14,10 +14,10 @@ import {
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addItem } from "../actions/itemActions";
+import { addItem, itemAdded } from "../actions/itemActions";
 import { clearErrors } from "../actions/errorActions";
 
-class AddItemForm extends Component {
+class AddItemModal extends Component {
   state = {
     modal: false,
     name: "",
@@ -28,21 +28,27 @@ class AddItemForm extends Component {
   };
 
   static propTypes = {
-    isAuthenticated: PropTypes.bool,
+    auth: PropTypes.object.isRequired,
+    item: PropTypes.object.isRequired,
     error: PropTypes.object.isRequired,
     addItem: PropTypes.func.isRequired,
+    itemAdded: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
   };
 
   componentDidUpdate(prevProps) {
     const { error } = this.props;
     if (error !== prevProps.error) {
-      // Check for register error
-      if (error.id === "ITEM_CREATION_FAIL") {
+      // Check for add item error
+      if (error.id === "ADD_ITEM_ERROR") {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
       }
+    }
+    if (this.state.modal && this.props.item.itemAdded) {
+      this.props.itemAdded();
+      this.toggle();
     }
   }
 
@@ -70,7 +76,9 @@ class AddItemForm extends Component {
       url
     };
 
-    this.props.addItem(newItem);
+    const token = this.props.auth.token;
+
+    this.props.addItem(newItem, token);
   };
 
   render() {
@@ -109,7 +117,7 @@ class AddItemForm extends Component {
 
                 <Label for='make'>Make</Label>
                 <Input
-                  type='make'
+                  type='text'
                   name='make'
                   id='make'
                   placeholder='Brand'
@@ -119,14 +127,19 @@ class AddItemForm extends Component {
 
                 <Label for='vendor'>Vendor</Label>
                 <Input
-                  type='vendor'
+                  type='text'
                   name='vendor'
                   id='vendor'
                   placeholder='Website'
                   className='mb-3'
                   onChange={this.onChange}
                 />
-                <Button color='dark' style={{ marginTop: "2rem" }} block>
+                <Button
+                  color='dark'
+                  style={{ marginTop: "2rem" }}
+                  disabled={this.props.item.isLoading}
+                  block
+                >
                   Add Item
                 </Button>
               </FormGroup>
@@ -139,11 +152,12 @@ class AddItemForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
+  item: state.item,
   error: state.error
 });
 
 export default connect(
   mapStateToProps,
-  { addItem, clearErrors }
-)(AddItemForm);
+  { addItem, clearErrors, itemAdded }
+)(AddItemModal);
