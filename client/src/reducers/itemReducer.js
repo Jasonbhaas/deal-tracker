@@ -11,7 +11,8 @@ import {
 const initialState = {
   items: [],
   loading: false,
-  itemProcessing: false
+  itemProcessing: false,
+  itemAdded: false
 };
 
 export default function(state = initialState, action) {
@@ -31,7 +32,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         items: [action.payload, ...state.items],
-        itemProcessing: false
+        itemProcessing: false,
+        itemAdded: true
       };
     case ITEMS_LOADING:
       return {

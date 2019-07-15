@@ -42,6 +42,7 @@ export const addItem = (item, token) => dispatch => {
   };
   axios(config)
     .then(res => {
+      console.log(res.data);
       dispatch({
         type: ADD_ITEM,
         payload: res.data

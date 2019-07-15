@@ -29,6 +29,7 @@ class AddItemModal extends Component {
 
   static propTypes = {
     auth: PropTypes.object.isRequired,
+    item: PropTypes.object.isRequired,
     error: PropTypes.object.isRequired,
     addItem: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
@@ -37,13 +38,19 @@ class AddItemModal extends Component {
   componentDidUpdate(prevProps) {
     const { error } = this.props;
     if (error !== prevProps.error) {
-      // Check for register error
+      // Check for add item error
       if (error.id === "ADD_ITEM_ERROR") {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
       }
     }
+
+    // if (this.props.item.itemAdded) {
+    //   this.setState({
+    //     modal: !this.state.modal
+    //   });
+    // }
   }
 
   toggle = () => {
@@ -128,7 +135,12 @@ class AddItemModal extends Component {
                   className='mb-3'
                   onChange={this.onChange}
                 />
-                <Button color='dark' style={{ marginTop: "2rem" }} block>
+                <Button
+                  color='dark'
+                  style={{ marginTop: "2rem" }}
+                  disabled={this.props.item.isLoading}
+                  block
+                >
                   Add Item
                 </Button>
               </FormGroup>
@@ -142,6 +154,7 @@ class AddItemModal extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  item: state.item,
   error: state.error
 });
 
