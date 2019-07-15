@@ -67,3 +67,9 @@ export const setItemProcessing = () => {
     type: ITEM_PROCESSING
   };
 };
+
+export const itemAdded = () => dispatch => {
+  dispatch({
+    type: ITEM_ADDED
+  });
+};

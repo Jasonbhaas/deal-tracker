@@ -14,7 +14,7 @@ import {
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addItem } from "../actions/itemActions";
+import { addItem, itemAdded } from "../actions/itemActions";
 import { clearErrors } from "../actions/errorActions";
 
 class AddItemModal extends Component {
@@ -32,6 +32,7 @@ class AddItemModal extends Component {
     item: PropTypes.object.isRequired,
     error: PropTypes.object.isRequired,
     addItem: PropTypes.func.isRequired,
+    itemAdded: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
   };
 
@@ -45,12 +46,10 @@ class AddItemModal extends Component {
         this.setState({ msg: null });
       }
     }
-
-    // if (this.props.item.itemAdded) {
-    //   this.setState({
-    //     modal: !this.state.modal
-    //   });
-    // }
+    if (this.state.modal && this.props.item.itemAdded) {
+      this.props.itemAdded();
+      this.toggle();
+    }
   }
 
   toggle = () => {
@@ -160,5 +159,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addItem, clearErrors }
+  { addItem, clearErrors, itemAdded }
 )(AddItemModal);

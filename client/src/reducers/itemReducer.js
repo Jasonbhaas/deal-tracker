@@ -51,6 +51,11 @@ export default function(state = initialState, action) {
         itemProcessing: false,
         loading: false
       };
+    case ITEM_ADDED:
+      return {
+        ...state,
+        itemAdded: false
+      };
     default:
       return state;
   }
