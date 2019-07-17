@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://{Username: Password}@cluster0-5lvli.mongodb.net/dev?retryWrites=true&w=majority",
+  "jwtSecret": "example Jwt Secret"
+}
