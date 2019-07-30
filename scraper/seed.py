@@ -50,4 +50,4 @@ items = [{
 if __name__ == "__main__":
     # itemsCollection.delete_many({})
     # itemsCollection.insert_many(items)
-    itemsCollection.delete_many({'make': 'Le Labo'})
+    # itemsCollection.delete_many({'make': 'Le Labo'})
