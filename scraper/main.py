@@ -4,6 +4,7 @@ from bson.objectid import ObjectId
 from scraper import get_price
 import pprint
 import datetime
+import time
 
 
 if __name__ == "__main__":
@@ -14,6 +15,7 @@ if __name__ == "__main__":
 
     for item in items.find():
         try:
+            time.sleep(1.5)  # pause so as to not spam the client website
             price = get_price(item['url'], item['keyword'])
             print(price)
             items.update_one({'_id': item['_id']},
